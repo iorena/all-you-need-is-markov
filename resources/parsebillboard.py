@@ -16,16 +16,18 @@ class BillboardParser:
 
 		tree = ElementTree(file=response)
 		root = tree.getroot()
-		root = root.find('body')
-		for child in root[2][4][3][2]:
+		body = root.find('body')
+		for child in body[2][4][3][2][1:]:
 			if len(list(child)) < 4:
 				continue
 			if len(list(child[1])) == 0:
-				continue
+				song = child[1].text
+			else:
+				song = child[1][0].attrib['title']
 			if len(list(child[2])) == 0:
-				continue
-			artist = child[2][0].attrib['title']
-			song = child[1][0].attrib['title']
+				artist = child[2].text
+			else:
+				artist = child[2][0].attrib['title']
 			songlist.append((song, artist))
 
 		return songlist

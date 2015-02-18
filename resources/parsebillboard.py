@@ -13,7 +13,6 @@ class BillboardParser:
 	def getSongList(self, year):
 		songlist = []
 		response = urllib2.urlopen('http://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_number-one_singles_of_' + str(year))
-
 		tree = ElementTree(file=response)
 		root = tree.getroot()
 		body = root.find('body')
